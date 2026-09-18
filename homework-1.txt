@@ -1,0 +1,4 @@
+make a calculator program (call it like calc.cpp or smth)
+
+it takes a user input for radius
+outputs the area of a circle given this radius
