@@ -11,6 +11,5 @@ int main() {
     // std::endl stands for end line - it makes a new line in your console
     std::cout << "first line" << std::endl;
     std::cout << "second line" << std::endl;
-    // what is a string?
-    // string of characters (it's text)
+    // what is a string? it's a string of characters (it's text)
 }
