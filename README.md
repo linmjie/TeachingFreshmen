@@ -1,3 +1,2 @@
 # C++
-- Using [studyplan.dev](lessons/onlineResource.md)
-- [IO](lessons/io.md) (input/output)
+- Follow along [here](lessons/onlineResource.md)

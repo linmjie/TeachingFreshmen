@@ -1,4 +1,7 @@
-# Navigating [studyplan.dev](https://www.studyplan.dev/intro-to-programming/objects-and-variables)
+# Main Lessons
+ - Online resource: [studyplan.dev](https://www.studyplan.dev/intro-to-programming/objects-and-variables)
+
+ - Whenever I say Chapter, Subchapter, or Heading, I'm referring to that thing on the studyplan.dev website
 
 ## Section 1 - Intro to programming - IO and variables
 
