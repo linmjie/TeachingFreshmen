@@ -13,7 +13,7 @@
  - Compiler: A program that takes a human readable programming language (like C++) and turns it into computer readable machine code
  - Abstraction: Probably the most important concept of computer science. It is the idea of hiding complex details behind a simple interface. 
     - Think about using ChatGPT. Do you care what kind of calculations they're doing? Do you think about all the complex math they do to generate a response? No, all you want is to ask it "Please write my 5 paragraph essay on Animal Farm :(" and have it spit out a 5 paragraph essay that your teacher will probably fail you for. The act of hiding these calculations is abstraction. 
-    - All programming is abstraction. Writing C++ code is an abstraction. You are writing human-readable code instead of machine readable code. You do not particularily care what the machine code will look like. All you care about is that 3 + 3 in C++ does exactly what you want to do.
+    - All programming is abstraction. Writing C++ code is an abstraction. You are writing human readable code instead of machine readable code. You do not particularily care what the machine code will look like. All you care is that `3 + 3` in C++ does exactly what you want it to do.
 
 ### Chapter 1
 Do all subchapters between "Setting up..." & "Introduction...". Do not be tempted to skip headings.
@@ -51,10 +51,10 @@ Start from subchapter "Creating..."
  - Argument(s): Describes what IS passed into a function - part of its call
 
  ### General Vocab
-  - Body (of a function, if-statement, while-loop, or for-loop): All the statements within the braces of a function (or if-statement, etc.). Everything within the braces of the main function is the body of the main function
+  - Body (of a function, if-statement, while-loop, or for-loop): All the statements within the braces of a function (or if-statement, etc.). Ex. everything within the braces of the main function is the body of the main function
 
 ### The `main` function
-Now that you understand functions, you may wonder why it has a return type of `int` rather than `void`. The `main` function actually returns an exit code, which tells the OS the ending status of the program. An exit code of 0 means the program ran successfully, any other number is an error code.
+Now that you understand functions, you may wonder why the `main` function has a return type of `int` rather than `void`. The `main` function actually returns an exit code, which tells the OS the ending status of the program. An exit code of 0 means the program ran successfully, any other number is an error code.
 ```cpp
 // But I don't write a return in my main function??
 #include <iostream>
@@ -80,7 +80,7 @@ int main() {
  Only read up on Member Initializer Lists (this should be in chapter 3 - it's kinda wonky). We do not have to worry about inheritance (probably)
 
  ### Chapter 9
-  - Just do "Dyanmic Arrays using `std::vector`\"
+  - Just do "Dynamic Arrays using `std::vector`\"
   - Don't use `[]` for indexing, use `.at()` instead
     - `.at()` is safer to use, `[]` can be dangerous and cause unexpected things to happen
   ```cpp
