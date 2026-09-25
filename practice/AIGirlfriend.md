@@ -11,6 +11,7 @@
         - If you haven't asked her out, she'll reject you
         - If you've asked her out, she will feed you a user specified amount of times (pass this amount in as an argument)
         - If and only if she feeds you more than 3 times, terminate the program
+ - Feel free to make your AI girlfriend do more things. It is YOUR AI girlfriend!
 
 Tip - ctrl-c can forcefully terminate a programming running in your terminal (including the vscode terminal)
 
