@@ -1,5 +1,5 @@
 # Main Lessons
- - Online resource: [studyplan.dev](https://www.studyplan.dev/intro-to-programming/objects-and-variables)
+ - Online resource: [studyplan.dev (external link)](https://www.studyplan.dev/intro-to-programming/objects-and-variables)
 
  - Whenever I say Chapter, Subchapter, or Heading, I'm referring to that thing on the studyplan.dev website
 
@@ -29,7 +29,7 @@ const double PI = 3.14159;
 PI = 3; // This will give a compilation error because we are changing a const
 ```
 
-### Go read up on [io](io.md)
+### Go read up on [io](io.md) - it is not included in the online tutorials
 
 ### Practice:
  - [Circle Calculator](../practice/circleCalculator.md)
@@ -69,13 +69,14 @@ int main() {
 
 ### Practice
  - [AI Girlfriend](../practice/AIGirlfriend.md)
- - [Fizzbuzz](https://www.studyplan.dev/intro-to-programming/fizzbuzz)
+ - [Card Permutation Calculator](../practice/CardsOdds.md)
+ - [Fizzbuzz (external link)](https://www.studyplan.dev/intro-to-programming/fizzbuzz)
 
 ## Section 3 - Organizing Complex Data - introduction
 
  ### Chapter 3
- Do the whole thing
-
+ Do the whole thing EXCEPT for structured binding (do it if you want but it won't be particularily useful)
+  - Note on constructors: it is generally preferable to use Member Initializer Lists over regular constructors (covered in chapter 4)
  ### Chapter 4
  Only read up on Member Initializer Lists (this should be in chapter 3 - it's kinda wonky). We do not have to worry about inheritance (probably)
 
@@ -95,6 +96,80 @@ int main() {
       std::cout << nums.at(2) << std::endl;
   }
   ```
+
+  ### Class Vocab
+   - Class: A blueprint for objects
+   - Object: An instance of a class with it's own fields/attributes
+   - Members: Variables and functions inside a class - attached to an instance of that class
+   - Attributes/Fields: A special name for member variables - these terms are all interchangable, fields/attributes is the more common term outside of C++
+   - Methods: A special name for member functions - attached to an instance of the class; you'll hear this used interchangeably with member functions in C++, but you'll usually hear methods more in other languages
+   - Special Member Functions - A set of 'special' member functions that take care of special tasks relating to the creation and deletion of objects. The compiler will automatically generate these for you unless you specify them (though you would rarely accept the compiler generated default constructor). There are 6 of these, but you only need to know the default constructor (which you would generally replace with a parameterized constructor) and potentially the destructor
+   - Access Modifiers: `private` or `public` (`protected` is one that we won't learn) - denote whether members can be accessed from outside the class/struct
+   - Here's an example class with comments to annotate:
+   ```cpp
+    class Monster {
+        // MEMBERS end
+
+        // MEMBER VARIABLES / FIELDS / ATTRIBUTES start
+        double health;
+        double damage;
+        int age;
+        // MEMBER VARIABLES / FIELDS / ATTRIBUTES end
+
+    // access modifier (public)
+    public:
+        // MEMBER FUNCTIONS / METHODS start
+
+        // special member function (parameterized constructor)
+        Monster(double health, double damage, int age) : health(health), damage(damage), age(age) {}
+
+        void growOlder() {
+            age++;
+            damage -= (damage * 0.1);
+        }
+
+        void takeDamage(double damage) {
+            health -= damage;
+        }
+        // MEMBER FUNCTIONS / METHODS end
+        // MEMBERS end
+    };
+   ```
+
+  ### Overloading the insertion (and extraction operators)
+   - The reason why C++ uses `cout << DATA` and `cin >> DATA` instead of function calls like every other language is because of operator overloading with custom types
+   - `cout` is actually an object of type `ostream`, and the `<<` operator can be overloading; the left hand side is an `ostream`, and the right hand side is the object being printed
+   - To allow for chaining (like `cout << "one thing" << "chained thing")`, the `<<` must return the ostream back out for the next `<<` to use.
+        - If you think about `3 + 4 + 5`, you need to collapse `3 + 4`, giving you `7`(an int), then you can do `7 + 5`
+   - The `ostream`s will be `ostream &`, meaning that it will pass in the actual object (namely `cout`) instead of a copy (functions pass by copy by default, you will learn more semantics later in section 4)
+   - This looks like the following:
+   ```cpp
+    std::ostream &operator<<(std::ostream &stream, XXX) {
+        // logic
+    }
+   ```
+   - The problem is if the object you're printing out has a bunch of private fields, you can't access them. This can be alleviated by declaring the function prototype is a 'friend' of the class
+   - The friend keyword allows a function (or class) to access private attributes of the current class; it is purposely cumbersome to use to deter you from using it excessively
+   ```cpp
+    #include <iostream>
+    #include <string>
+
+    class Person {
+        std::string name;
+        int age;
+
+        friend std::ostream &operator<<(std::ostream &stream, Person person);
+    }
+
+    std::ostream &operator<<(std::ostream &stream, Person person) {
+        std::cout << person.name << person.age;
+    }
+
+    int main() {
+        Person bob("bob", 12);
+        std::cout << bob << std::endl;
+    }
+   ```
 
  ## Section 4 - Organizing Complex Data - extras
 
