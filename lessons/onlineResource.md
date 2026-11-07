@@ -77,25 +77,12 @@ int main() {
  ### Chapter 3
  Do the whole thing EXCEPT for structured binding (do it if you want but it won't be particularily useful)
   - Note on constructors: it is generally preferable to use Member Initializer Lists over regular constructors (covered in chapter 4)
+
  ### Chapter 4
  Only read up on Member Initializer Lists (this should be in chapter 3 - it's kinda wonky). We do not have to worry about inheritance (probably)
 
- ### Chapter 9
-  - Just do "Dynamic Arrays using `std::vector`\"
-  - Don't use `[]` for indexing, use `.at()` instead
-    - `.at()` is safer to use, `[]` can be dangerous and cause unexpected things to happen
-  ```cpp
-  #include <iostream>
-  #include <vector>
-  
-  int main() {
-      std::vector nums{10, 9, 8, 7, 6, 5};
-      // don't do this
-      std::cout << nums[2] << std::endl;
-      // do this instead
-      std::cout << nums.at(2) << std::endl;
-  }
-  ```
+ ### Chapter 5
+ Only read about references - we'll go back to the rest later
 
   ### Class Vocab
    - Class: A blueprint for objects
@@ -108,7 +95,7 @@ int main() {
    - Here's an example class with comments to annotate:
    ```cpp
     class Monster {
-        // MEMBERS end
+        // MEMBERS start
 
         // MEMBER VARIABLES / FIELDS / ATTRIBUTES start
         double health;
@@ -136,32 +123,34 @@ int main() {
     };
    ```
 
-  ### Overloading the insertion (and extraction operators)
+  ### Overloading the insertion (and extraction) operators
    - The reason why C++ uses `cout << DATA` and `cin >> DATA` instead of function calls like every other language is because of operator overloading with custom types
-   - `cout` is actually an object of type `ostream`, and the `<<` operator can be overloading; the left hand side is an `ostream`, and the right hand side is the object being printed
+   - `cout` is actually an object of type `ostream`, and the `<<` operator can be overloaded; the left hand side is an `ostream`, and the right hand side is the object being printed
    - To allow for chaining (like `cout << "one thing" << "chained thing")`, the `<<` must return the ostream back out for the next `<<` to use.
         - If you think about `3 + 4 + 5`, you need to collapse `3 + 4`, giving you `7`(an int), then you can do `7 + 5`
-   - The `ostream`s will be `ostream &`, meaning that it will pass in the actual object (namely `cout`) instead of a copy (functions pass by copy by default, you will learn more semantics later in section 4)
+   - The `ostream`s will be `ostream &`, meaning that it will pass in the actual object (namely `cout`) instead of a copy (recall functions pass in copies of arguments by default)
    - This looks like the following:
    ```cpp
     std::ostream &operator<<(std::ostream &stream, XXX) {
         // logic
     }
    ```
-   - The problem is if the object you're printing out has a bunch of private fields, you can't access them. This can be alleviated by declaring the function prototype is a 'friend' of the class
+   - The problem is if the object you're printing out has a bunch of private fields, you can't access them. This can be alleviated by declaring the function prototype as a 'friend' of the class
    - The friend keyword allows a function (or class) to access private attributes of the current class; it is purposely cumbersome to use to deter you from using it excessively
    ```cpp
     #include <iostream>
+    #include <ostream>
     #include <string>
 
     class Person {
         std::string name;
         int age;
 
-        friend std::ostream &operator<<(std::ostream &stream, Person person);
+        friend std::ostream &operator<<(std::ostream &stream, const Person &person);
     }
 
-    std::ostream &operator<<(std::ostream &stream, Person person) {
+    std::ostream &operator<<(std::ostream &stream, const Person &person) {
+        // can access person's private members as its friend
         std::cout << person.name << person.age;
     }
 
@@ -170,6 +159,28 @@ int main() {
         std::cout << bob << std::endl;
     }
    ```
+ ### Practice
+ - [Monster Fight](../practice/MonsterFightBasic.md)
+
+ ### Chapter 9
+  - Just do "Dynamic Arrays using `std::vector`\"
+  - Don't use `[]` for indexing, use `.at()` instead
+    - `.at()` is safer to use, `[]` can be dangerous and cause unexpected things to happen
+  ```cpp
+  #include <iostream>
+  #include <vector>
+  
+  int main() {
+      std::vector nums{10, 9, 8, 7, 6, 5};
+      // don't do this
+      std::cout << nums[2] << std::endl;
+      // do this instead
+      std::cout << nums.at(2) << std::endl;
+  }
+  ```
+ ### Practice
+ - [Monster Fight - Advanced](../practice/MonsterFightAdvanced.md)
+
 
  ## Section 4 - Organizing Complex Data - extras
 
